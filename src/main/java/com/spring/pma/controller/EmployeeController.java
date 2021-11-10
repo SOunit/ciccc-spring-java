@@ -6,28 +6,29 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.spring.pma.dao.iEmployeeRepository;
 import com.spring.pma.dao.iProjectRepository;
+import com.spring.pma.entity.Employee;
 import com.spring.pma.entity.Project;
 
 @Controller
-@RequestMapping("/projects")
-public class ProjectController {
+@RequestMapping("/employees")
+public class EmployeeController {
 	
 	@Autowired
-	iProjectRepository proRepo;
+	iEmployeeRepository empRepo;
 	
-//	@RequestMapping("/new")
 	@GetMapping("/new")
-	public String displayProjectForm(Model model) {
-		model.addAttribute("project", new Project());
-		return "projects/new-project";
+	public String displayEmployeeForm(Model model) {
+		model.addAttribute("employee", new Employee());
+		return "employees/new-employee";
 	}
 	
-//	@RequestMapping(value="/save", method = RequestMethod.POST)
 	@PostMapping("/save")
-	public String createProject(Project project, Model model) {
+	public String createEmployee(Employee employee, Model model) {
 		//	this is where we save to database	
-		proRepo.save(project);
+		empRepo.save(employee);
 		return "redirect:/";
 	}
 }
